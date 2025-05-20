@@ -1,0 +1,67 @@
+/* Aseguramos que el body y el html ocupen toda la altura de la ventana */
+html, body {
+    height: 100%;     /* Asegura que el cuerpo ocupe toda la altura de la ventana */
+    margin: 0;        /* Elimina los márgenes predeterminados */
+  }
+  
+  /* Contenedor principal de la aplicación */
+  .app-container {
+    display: flex;
+    flex-direction: column;  /* Organizar el contenido de manera vertical */
+    height: 100%;            /* Asegura que el contenedor ocupe toda la altura */
+  }
+  
+  /* Estilo para el Header, puede tener tu propio estilo */
+  .header {
+    background-color: #333;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  /* Estilo del footer */
+  .footer {
+    position: fixed;
+    background-color: #333;    /* Fondo oscuro para el footer */
+    color: #fff;               /* Texto blanco */
+    padding: 1rem 0;           /* Espaciado interno */
+    text-align: center;        /* Centra el texto */
+    margin-top: auto;          /* Esto hace que el footer se ancle al fondo */
+    width: 100%;               /* El footer ocupará todo el ancho */
+    bottom: 0px;
+  }
+  
+  /* Enlaces dentro del footer */
+  .footer-links {
+    display: flex;
+    justify-content: center;    /* Centra los enlaces */
+    gap: 2rem;                  /* Espaciado entre los enlaces */
+    margin-bottom: 1rem;        /* Espaciado debajo de los enlaces */
+  }
+  
+  .footer-link {
+    text-decoration: none;      /* Eliminar subrayado */
+    color: #fff;                /* Color blanco para los enlaces */
+    font-size: 1rem;            /* Tamaño de fuente */
+    font-weight: 400;           /* Peso de fuente normal */
+    transition: color 0.3s ease; /* Transición suave para el hover */
+  }
+  
+  .footer-link:hover {
+    color: #8A8A8A;  /* Cambiar color a gris cuando se pasa el mouse */
+  }
+  
+  /* Estilo del texto del footer */
+  .footer-text {
+    font-size: 0.9rem;
+    color: #ccc;    /* Color más claro para el texto */
+  }
+  
+  /* Responsividad para pantallas pequeñas */
+  @media (max-width: 768px) {
+    .footer-links {
+      flex-direction: column;  /* Cambiar a columna en pantallas pequeñas */
+      gap: 1rem;               /* Espaciado más pequeño entre los enlaces */
+    }
+  }
+  

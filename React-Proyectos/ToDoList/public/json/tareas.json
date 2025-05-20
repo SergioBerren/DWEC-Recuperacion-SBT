@@ -1,0 +1,43 @@
+[
+    {
+      "titulo": "Actualizar servidores",
+      "descripcion": "Realizar actualizaciones de seguridad y mantenimiento en los servidores principales del centro de datos."
+    },
+    {
+      "titulo": "Desarrollar módulo de autenticación",
+      "descripcion": "Implementar un sistema de login con autenticación multifactor para la nueva aplicación web corporativa."
+    },
+    {
+      "titulo": "Realizar copia de seguridad",
+      "descripcion": "Ejecutar y verificar las copias de seguridad de bases de datos y archivos críticos."
+    },
+    {
+      "titulo": "Revisar tickets de soporte",
+      "descripcion": "Atender y resolver los tickets de soporte técnico pendientes enviados por clientes internos y externos."
+    },
+    {
+      "titulo": "Optimizar base de datos",
+      "descripcion": "Analizar y optimizar las consultas SQL más lentas en el sistema de gestión ERP."
+    },
+    {
+      "titulo": "Implementar políticas de seguridad",
+      "descripcion": "Establecer y documentar nuevas políticas de ciberseguridad para el uso de dispositivos personales en la red corporativa."
+    },
+    {
+      "titulo": "Migrar correos a Microsoft 365",
+      "descripcion": "Planificar y ejecutar la migración del sistema de correo electrónico a Microsoft 365 para toda la empresa."
+    },
+    {
+      "titulo": "Capacitación interna en Git",
+      "descripcion": "Organizar una sesión de formación sobre control de versiones con Git para el equipo de desarrollo."
+    },
+    {
+      "titulo": "Monitorear infraestructura en la nube",
+      "descripcion": "Supervisar el rendimiento de los servicios desplegados en AWS y responder a posibles alertas."
+    },
+    {
+      "titulo": "Documentar APIs REST",
+      "descripcion": "Generar documentación técnica clara y actualizada de las APIs REST utilizadas por el equipo de desarrollo."
+    }
+  ]
+  
