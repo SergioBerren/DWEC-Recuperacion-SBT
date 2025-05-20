@@ -1,7 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Swal from "sweetalert2";
 import '../estilos/estiloTareasGenerales.css';
 
-function TareasGenerales({ tareas, misTareas, agregarTarea }) {
+function TareasGenerales({ misTareas, agregarTarea }) {
+  const [tareas, setTareas] = useState([]);
+
+  useEffect(() => {
+    axios.get('/json/tareas.json')
+      .then(response => {
+        setTareas(response.data);
+      })
+      .catch(error => {
+        console.error("Error al cargar las tareas:", error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'No se pudieron cargar las tareas. Intenta más tarde.',
+        });
+      });
+  }, []);
+
   return (
     <section>
       <h2>Tareas Generales</h2>
@@ -26,4 +45,4 @@ function TareasGenerales({ tareas, misTareas, agregarTarea }) {
   );
 }
 
-export default TareasGenerales
+export default TareasGenerales;
