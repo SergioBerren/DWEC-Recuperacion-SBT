@@ -24,7 +24,7 @@ function Main() {
       .catch((err) => console.error("Error al cargar tareas:", err));
   }, []);
 
-  useEffect(() => {
+  useEffect(() => { 
     localStorage.setItem("misTareas", JSON.stringify(misTareas));
   }, [misTareas]);
 
