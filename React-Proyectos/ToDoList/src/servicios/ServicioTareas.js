@@ -10,15 +10,15 @@ class ServicioTareas {
     }
 
     create(data){
-        return http.get("/tareas", data);
+        return http.post("/tareas", data);
     }
 
     update(id, data){
-        return http.get(`/tareas/${id}`, data);
+        return http.update(`/tareas/${id}`, data);
     }
 
     delete(id){
-        return http.get(`/tareas/${id}`);
+        return http.delete(`/tareas/${id}`);
     }
 }
 

@@ -81,6 +81,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/SobreMi" element={<SobreMi />} />
         <Route path="/politicadeprivacidad" element={<PoliticaDePrivacidad />} />
         <Route path="/terminos" element={<TerminosYCondiciones />} />
+        <Route path="/mistareas" element={<MisTareas />}/>
       </Routes>
       <Footer />
     </BrowserRouter>
