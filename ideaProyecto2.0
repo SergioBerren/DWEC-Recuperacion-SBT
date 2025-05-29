@@ -1,13 +1,9 @@
-Meter emailJS a Contacto
-
-Axios
-
 Sobre Mi (Puedo hacer un sobre mi de la aplicación o un sobre mi personalizado según el login)
 
-Modales
+Modales (Hacer modal de modificar tarea y de crear tarea)
 
-Login (Puedo meter permisos de administrador)
+Login (Puedo meter permisos de administrador) => (Modificar y crear)
 
 WebStorage
 
-Posible mejora en las rutas (Tareas Generales y Mis Tareas sea por ruta y no un botón)
+Tocar EmailJS y mi correo secundario (Para dar una mejor apariencia)
