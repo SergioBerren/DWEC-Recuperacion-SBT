@@ -1,0 +1,52 @@
+/* Contenedor principal del header */
+.header {
+  position: fixed;           /* Fijar el menú en la parte superior */
+  top: 0;                    /* Colocarlo en la parte superior de la pantalla */
+  left: 0;                   /* Alinearlo con el borde izquierdo */
+  right: 0;                  /* Alinearlo con el borde derecho */
+  background-color: #333;    /* Fondo oscuro para el header */
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;             /* Asegurarse de que esté encima de otros elementos */
+}
+
+/* Contenedor del menú de navegación */
+.nav {
+  display: flex;
+  justify-content: center;  /* Centra los elementos horizontalmente */
+  align-items: center;
+  gap: 2rem;  /* Espaciado entre los enlaces */
+}
+
+/* Estilo para cada enlace del menú */
+.nav-link {
+  text-decoration: none;  /* Eliminar subrayado */
+  color: #fff;            /* Color blanco para los enlaces */
+  font-weight: 600;        /* Hacer los enlaces un poco más gruesos */
+  font-size: 1.2rem;       /* Tamaño de fuente más grande */
+  transition: color 0.3s ease, transform 0.3s ease;  /* Añadir transición suave */
+  padding: 0.5rem 1rem;    /* Espaciado alrededor del enlace */
+  border-radius: 4px;      /* Bordes redondeados */
+}
+
+/* Efecto cuando el mouse pasa sobre el enlace */
+.nav-link:hover {
+  color: #8A8A8A;  /* Cambiar el color a gris */
+  transform: scale(1.1);  /* Ampliar ligeramente el enlace */
+  background-color: rgba(0, 123, 255, 0.1);  /* Añadir un fondo sutil al hacer hover */
+}
+
+/* Estilos adicionales (opcional) */
+
+/* Para hacer que el menú sea más compacto en pantallas pequeñas */
+@media (max-width: 768px) {
+  .nav {
+    flex-direction: column;  /* Cambiar a columna en pantallas más pequeñas */
+    gap: 1rem;  /* Menos espacio entre los enlaces */
+  }
+}
+
+/* Agregar margen superior al contenido para que no quede debajo del header fijo */
+body {
+  padding-top: 4rem;  /* Deja espacio para el header fijo */
+}

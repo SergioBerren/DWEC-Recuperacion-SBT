@@ -1,0 +1,75 @@
+/* Estilos para Términos y Condiciones */
+.terminos-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    line-height: 1.6;
+    color: #333;
+  }
+  
+  .fecha-actualizacion {
+    color: #666;
+    font-style: italic;
+    margin-bottom: 2rem;
+  }
+  
+  .seccion-terminos {
+    margin-bottom: 2rem;
+  }
+  
+  .seccion-terminos h2 {
+    color: #2c3e50;
+    margin-top: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .seccion-terminos ul {
+    padding-left: 1.5rem;
+    margin: 1rem 0;
+  }
+  
+  .seccion-terminos li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .link-interno {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .link-interno:hover {
+    text-decoration: underline;
+  }
+  
+  /* Reutiliza los mismos estilos de botón que la política */
+  .volver-inicio {
+    margin-top: 3rem;
+    text-align: center;
+  }
+  
+  .boton-volver {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #2c3e50;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
+  
+  .boton-volver:hover {
+    background-color: #3498db;
+  }
+  
+  @media (max-width: 768px) {
+    .terminos-container {
+      padding: 1rem;
+      margin: 1rem;
+    }
+    
+    .seccion-terminos h2 {
+      font-size: 1.2rem;
+    }
+  }

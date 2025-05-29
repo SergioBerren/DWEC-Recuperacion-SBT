@@ -1,0 +1,154 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+    padding: 20px;
+}
+
+nav.menu {
+    background-color: #007bff;
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+nav.menu a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+nav.menu a:hover {
+    background-color: black;
+}
+
+main {
+    width: 100%;
+    max-width: 1000px;
+    background: white;
+    padding: 40px;
+    margin: 20px auto;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: left;
+}
+
+/* Estructura de cada tarea */
+.tarea {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+}
+
+section {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Alineación del texto */
+section p {
+    margin: 0;
+    flex-grow: 1;
+    margin-right: 20px;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    background-color: #28a745;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+/* Mensaje de tarea asignada */
+.asignada {
+    margin-left: 10px;
+    font-weight: bold;
+    color: #28a745;
+    font-size: 0.9em;
+}
+
+/* Pseudo-clase para manejar la visualización de las secciones */
+section:not(:first-child) {
+    margin-top: 20px;
+}
+
+/* Estilo para los radiobuttons */
+.prioridad {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.prioridad label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    color: #333;
+}
+
+.prioridad input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid #007bff;
+    appearance: none;
+    background-color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.prioridad input[type="radio"]:checked {
+    background-color: #007bff;
+    border-color: #0056b3;
+}
+
+.prioridad input[type="radio"]:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.prioridad input[type="radio"]:hover {
+    background-color: #d1e7ff;
+    border-color: #0056b3;
+}
+
+.prioridad input[type="radio"]:checked + label {
+    font-weight: bold;
+    color: #007bff;
+}
+
+.prioridad p {
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 1.1rem;
+}

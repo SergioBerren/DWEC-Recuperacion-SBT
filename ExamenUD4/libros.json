@@ -1,0 +1,82 @@
+[
+    {
+        "titulo": "Cien años de soledad",
+        "autor": "Gabriel García Márquez",
+        "genero": "Realismo mágico",
+        "año": 1967,
+        "precio": 15.99,
+        "categoria": "Clásico"
+    },
+    {
+        "titulo": "1984",
+        "autor": "George Orwell",
+        "genero": "Ciencia ficción",
+        "año": 1949,
+        "precio": 12.50,
+        "categoria": "Distopía"
+    },
+    {
+        "titulo": "El Gran Gatsby",
+        "autor": "F. Scott Fitzgerald",
+        "genero": "Novela",
+        "año": 1925,
+        "precio": 10.00,
+        "categoria": "Clásico"
+    },
+    {
+        "titulo": "Matar a un ruiseñor",
+        "autor": "Harper Lee",
+        "genero": "Drama",
+        "año": 1960,
+        "precio": 9.99,
+        "categoria": "Clásico"
+    },
+    {
+        "titulo": "Orgullo y prejuicio",
+        "autor": "Jane Austen",
+        "genero": "Romance",
+        "año": 1813,
+        "precio": 8.75,
+        "categoria": "Romance"
+    },
+    {
+        "titulo": "Don Quijote de la Mancha",
+        "autor": "Miguel de Cervantes",
+        "genero": "Novela",
+        "año": 1605,
+        "precio": 14.20,
+        "categoria": "Clásico"
+    },
+    {
+        "titulo": "La sombra del viento",
+        "autor": "Carlos Ruiz Zafón",
+        "genero": "Misterio",
+        "año": 2001,
+        "precio": 11.30,
+        "categoria": "Misterio"
+    },
+    {
+        "titulo": "El señor de los anillos",
+        "autor": "J.R.R. Tolkien",
+        "genero": "Fantasía",
+        "año": 1954,
+        "precio": 18.50,
+        "categoria": "Fantasía"
+    },
+    {
+        "titulo": "Harry Potter y la piedra filosofal",
+        "autor": "J.K. Rowling",
+        "genero": "Fantasía",
+        "año": 1997,
+        "precio": 16.99,
+        "categoria": "Fantasía"
+    },
+    {
+        "titulo": "Crónica de una muerte anunciada",
+        "autor": "Gabriel García Márquez",
+        "genero": "Novela",
+        "año": 1981,
+        "precio": 7.99,
+        "categoria": "Clásico"
+    }
+]

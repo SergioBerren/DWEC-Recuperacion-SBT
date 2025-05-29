@@ -1,0 +1,51 @@
+/* MisTareas.css */
+
+/* Sección principal */
+section {
+    margin-bottom: 2rem;
+  }
+  
+  h2 {
+    color: #343a40;
+    margin-bottom: 1rem;
+  }
+  
+  /* Contenedor de cada tarea */
+  .tarea {
+    background: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: background 0.3s;
+  }
+  
+  .tarea:hover {
+    background: #f8f9fa;
+    cursor: pointer;
+  }
+  
+  /* Controles de prioridad */
+  .prioridad {
+    margin-top: 0.5rem;
+  }
+  
+  .prioridad p {
+    margin: 0;
+    font-weight: bold;
+    color: #495057;
+  }
+  
+  .prioridad label {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .prioridad input[type="radio"] {
+    margin-left: 0.3rem;
+    transform: scale(1.2);
+  }
+  

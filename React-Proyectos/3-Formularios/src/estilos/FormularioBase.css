@@ -1,0 +1,127 @@
+/* Estilos generales */
+form {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border: 1px solid #007bff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 123, 255, 0.1);
+  font-family: 'Arial', sans-serif;
+  box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+}
+
+/* Etiquetas */
+form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #007bff;
+}
+
+/* Inputs de texto, select y textarea */
+form input[type="text"],
+form textarea,
+form select {
+  width: 100%; /* Garantiza que los inputs se ajusten al 100% del ancho del formulario */
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #007bff;
+  border-radius: 4px;
+  font-size: 1rem;
+  color: #333;
+  box-sizing: border-box; /* Asegura que el padding no incremente el ancho */
+  transition: border-color 0.3s;
+}
+
+form input[type="text"]:focus,
+form textarea:focus,
+form select:focus {
+  border-color: #0056b3;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Textarea */
+form textarea {
+  resize: vertical;
+  height: 120px;
+}
+
+/* Checkbox y Radio */
+form input[type="checkbox"],
+form input[type="radio"] {
+  margin-right: 10px;
+}
+
+form fieldset {
+  margin-bottom: 20px;
+  border: none;
+}
+
+form legend {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+form div {
+  margin-bottom: 10px;
+}
+
+/* Botón de envío */
+form button {
+  display: inline-block;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%; /* Hacemos el botón de ancho completo */
+}
+
+form button:hover {
+  background-color: #0056b3;
+}
+
+/* Estilo para los errores */
+.error {
+  color: #e74c3c;
+  font-size: 0.9rem;
+  margin-top: -8px;
+  margin-bottom: 12px;
+}
+
+/* Estilos para el campo "nombre" */
+form #nombre {
+  border: 1px solid #007bff;
+}
+
+form #nombre:focus {
+  border-color: #0056b3;
+}
+
+/* Estilos para el campo "descripcion" */
+form #descripcion {
+  border: 1px solid #007bff;
+}
+
+form #descripcion:focus {
+  border-color: #0056b3;
+}
+
+/* Adaptación para pantallas pequeñas */
+@media (max-width: 600px) {
+  form {
+    padding: 15px;
+  }
+
+  form button {
+    width: 100%;
+    padding: 12px 20px;
+  }
+}

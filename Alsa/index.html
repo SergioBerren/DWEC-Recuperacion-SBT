@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulario de Viaje</title>
+  <link rel="stylesheet" href="estilos.css" />
+  <script src="javascript.js" defer></script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+    <div class="form-container">
+      <form id="travelForm">
+        <input type="text" id="origen" name="origen" placeholder="Origen"/>
+  
+        <button type="button" id="swapButton" class="icon-button" title="Intercambiar">
+            <i class="fas fa-arrows-left-right"></i>
+          </button>
+  
+        <input type="text" id="destino" name="destino" placeholder="Destino"/>
+        <input type="date" id="fechaIda" name="fechaIda" required />
+        <input type="date" id="fechaVuelta" name="fechaVuelta" />
+  
+        <label class="checkbox">
+          <input type="checkbox" id="soloIda" name="soloIda" />
+          Solo Ida
+        </label>
+  
+        <button id="btnBuscar" type="submit">Buscar</button>
+      </form>
+  
+      <div class="hidden"id="errorMensaje" class="error-mensaje"></div>
+    </div>
+  
+    <div class="form-resultados">
+        <div class="form-resultados" id="formResultados">
+            <p><strong>Origen:</strong> <span id="resOrigen">—</span></p>
+            <p><strong>Destino:</strong> <span id="resDestino">—</span></p>
+            <p><strong>Fecha Ida:</strong> <span id="resFechaIda">—</span></p>
+            <p><strong>Fecha Vuelta:</strong> <span id="resFechaVuelta">—</span></p>
+            <p><strong>Solo Ida:</strong> <span id="resSoloIda">—</span></p>
+          </div>
+
+    </div>
+  </body>
+</html>
