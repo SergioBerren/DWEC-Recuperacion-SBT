@@ -7,25 +7,10 @@ function TareasGenerales({ misTareas, agregarTarea }) {
   const [tareas, setTareas] = useState([]);
   const [titulo, setTitulo] = useState("");
   const [descripcion, setDescripcion] = useState("");
-<<<<<<< HEAD
-
-  // Cargar tareas al montar el componente
-  useEffect(() => {
-    ServicioTareas.getAll()
-  .then(response => {
-    console.log("Respuesta del backend:", response.data);
-    const data = response.data;
-    if (Array.isArray(data)) {
-      setTareas(data);
-    } else {
-      throw new Error("Estructura de datos inválida");
-    }
-  })
-
-=======
   const [modoEdicion, setModoEdicion] = useState(false);
   const [idEditar, setIdEditar] = useState(null);
 
+  // Cargar tareas al montar el componente
   useEffect(() => {
     ServicioTareas.getAll()
       .then(response => {
@@ -36,7 +21,6 @@ function TareasGenerales({ misTareas, agregarTarea }) {
           throw new Error("Estructura de datos inválida");
         }
       })
->>>>>>> main
       .catch(error => {
         console.error("Error al cargar las tareas:", error);
         Swal.fire({
@@ -47,10 +31,6 @@ function TareasGenerales({ misTareas, agregarTarea }) {
       });
   }, []);
 
-<<<<<<< HEAD
-  // Crear nueva tarea
-=======
->>>>>>> main
   function crearTareas(e) {
     e.preventDefault();
 
@@ -63,37 +43,6 @@ function TareasGenerales({ misTareas, agregarTarea }) {
       return;
     }
 
-<<<<<<< HEAD
-    const nuevaTarea = {
-      titulo: titulo.trim(),
-      descripcion: descripcion.trim(),
-    };
-
-    ServicioTareas.create(nuevaTarea)
-      .then(response => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Tarea creada',
-          text: 'La tarea fue agregada correctamente.',
-        });
-
-        // Asumimos que la respuesta incluye la tarea creada con su ID
-        setTareas(prev => [...prev, response.data]);
-        setTitulo("");
-        setDescripcion("");
-      })
-      .catch(error => {
-        console.error("Error al crear la tarea:", error);
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'No se pudo crear la tarea.',
-        });
-      });
-  }
-
-  // Eliminar tarea por ID
-=======
     if (modoEdicion) {
       const tareaEditada = {
         titulo: titulo.trim(),
@@ -138,7 +87,6 @@ function TareasGenerales({ misTareas, agregarTarea }) {
     }
   }
 
->>>>>>> main
   function eliminarTarea(idEliminar, tituloEliminar) {
     Swal.fire({
       title: `¿Eliminar tarea "${tituloEliminar}"?`,
@@ -155,22 +103,12 @@ function TareasGenerales({ misTareas, agregarTarea }) {
           })
           .catch(error => {
             console.error("Error al eliminar la tarea:", error);
-<<<<<<< HEAD
-            Swal.fire({
-              icon: 'error',
-              title: 'Error',
-              text: 'No se pudo eliminar la tarea.',
-            });
-=======
             Swal.fire('Error', 'No se pudo eliminar la tarea.', 'error');
->>>>>>> main
           });
       }
     });
   }
 
-<<<<<<< HEAD
-=======
   function editarTarea(tarea) {
     setModoEdicion(true);
     setTitulo(tarea.titulo);
@@ -185,15 +123,10 @@ function TareasGenerales({ misTareas, agregarTarea }) {
     setIdEditar(null);
   }
 
->>>>>>> main
   return (
     <section>
       <h2>Tareas Generales</h2>
 
-<<<<<<< HEAD
-      {/* FORMULARIO PARA CREAR NUEVA TAREA */}
-=======
->>>>>>> main
       <form onSubmit={crearTareas} className="formulario-tarea">
         <input
           type="text"
@@ -207,22 +140,12 @@ function TareasGenerales({ misTareas, agregarTarea }) {
           value={descripcion}
           onChange={(e) => setDescripcion(e.target.value)}
         />
-<<<<<<< HEAD
-        <button type="submit">Crear Tarea</button>
-      </form>
-
-      {/* LISTA DE TAREAS */}
-      {Array.isArray(tareas) && tareas.length > 0 ? (
-        tareas.map((tarea) => {
-          console.log(`${tareas}`)
-=======
         <button type="submit">{modoEdicion ? "Modificar Tarea" : "Crear Tarea"}</button>
         {modoEdicion && <button type="button" onClick={resetFormulario}>Cancelar</button>}
       </form>
 
       {Array.isArray(tareas) && tareas.length > 0 ? (
         tareas.map((tarea) => {
->>>>>>> main
           const yaAsignada = misTareas.some((t) => t.titulo === tarea.titulo);
           return (
             <div key={tarea.id} className="tarea">
@@ -236,15 +159,12 @@ function TareasGenerales({ misTareas, agregarTarea }) {
                 Agregar tarea
               </button>
               <button
-<<<<<<< HEAD
-=======
                 onClick={() => editarTarea(tarea)}
                 className="btn-editar"
               >
                 Modificar
               </button>
               <button
->>>>>>> main
                 onClick={() => eliminarTarea(tarea.id, tarea.titulo)}
                 className="btn-eliminar"
               >

@@ -10,13 +10,11 @@ import TerminosYCondiciones from './paginas/TerminosYCondiciones.jsx';
 import TareasGenerales from "./paginas/TareasGenerales";
 import MisTareas from "./paginas/MisTareas";
 
-<<<<<<< HEAD
-function Main() {
+function App() {
   const [tareasGenerales, setTareasGenerales] = useState([]);
   const [misTareas, setMisTareas] = useState(() => {
     return JSON.parse(localStorage.getItem("misTareas")) || [];
   });
-  const [seccion, setSeccion] = useState("tareasGenerales");
 
   useEffect(() => {
     fetch("/json/tareas.json")
@@ -26,14 +24,6 @@ function Main() {
   }, []);
 
   useEffect(() => { 
-=======
-function App() {
-  const [misTareas, setMisTareas] = useState(() => {
-    return JSON.parse(localStorage.getItem("misTareas")) || [];
-  });
-
-  useEffect(() => {
->>>>>>> main
     localStorage.setItem("misTareas", JSON.stringify(misTareas));
   }, [misTareas]);
 
@@ -55,35 +45,12 @@ function App() {
   };
 
   return (
-<<<<<<< HEAD
-    <main>
-      <nav>
-        <button onClick={() => setSeccion("tareasGenerales")}>Tareas Generales</button>
-        <button onClick={() => setSeccion("misTareas")}>Mis Tareas</button>
-      </nav>
-
-      {seccion === "tareasGenerales" && (
-        <TareasGenerales
-          tareas={tareasGenerales}
-          misTareas={misTareas}
-          agregarTarea={agregarTarea}
-        />
-      )}
-
-      {seccion === "misTareas" && (
-        <MisTareas
-          misTareas={misTareas}
-          quitarTarea={quitarTarea}
-          actualizarPrioridad={actualizarPrioridad}
-        />
-      )}
-    </main>
-=======
     <BrowserRouter>
       <Header />
       <Routes>
         <Route path="/" element={
           <TareasGenerales
+            tareas={tareasGenerales}
             misTareas={misTareas}
             agregarTarea={agregarTarea}
           />
@@ -102,29 +69,11 @@ function App() {
       </Routes>
       <Footer />
     </BrowserRouter>
->>>>>>> main
   );
 }
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-<<<<<<< HEAD
-    <BrowserRouter>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/Contacto" element={<Contacto />} />
-        <Route path="/SobreMi" element={<SobreMi />} />
-        <Route path="/politicadeprivacidad" element={<PoliticaDePrivacidad />} />
-        <Route path="/terminos" element={<TerminosYCondiciones />} />
-        <Route path="/mistareas" element={<MisTareas />}/>
-      </Routes>
-      <Footer />
-    </BrowserRouter>
-  </StrictMode>
-);
-=======
     <App />
   </StrictMode>
 );
->>>>>>> main
