@@ -37,4 +37,4 @@ function MisTareas({ misTareas, quitarTarea, actualizarPrioridad }) {
   );
 }
 
-export default MisTareas
+export default MisTareas;

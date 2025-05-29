@@ -14,7 +14,11 @@ class ServicioTareas {
     }
 
     update(id, data){
+<<<<<<< HEAD
         return http.update(`/tareas/${id}`, data);
+=======
+        return http.put(`/tareas/${id}`, data);
+>>>>>>> main
     }
 
     delete(id){

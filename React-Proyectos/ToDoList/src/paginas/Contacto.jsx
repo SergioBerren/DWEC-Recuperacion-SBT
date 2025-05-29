@@ -1,9 +1,7 @@
 import React, { useState } from "react";
+import emailjs from "emailjs-com";
 import Swal from "sweetalert2";
 import "../estilos/estiloFormularioContacto.css";
-
-// Añadir emailJS
-// Hay que usar este comando para instalarlo "npm install emailjs-com"
 
 function Contacto() {
   const [form, setForm] = useState({
@@ -25,14 +23,19 @@ function Contacto() {
 
     if (!form.nombre.trim()) {
       nuevosErrores.nombre = "El nombre es obligatorio";
-    } else if(form.nombre.length < 2 || form.nombre.length > 20){
+    } else if (form.nombre.length < 2 || form.nombre.length > 20) {
       nuevosErrores.nombre = "El nombre debe tener de 2 a 20 caracteres";
-    } else if(/\d/.test(form.nombre)){
-      nuevosErrores.nombre = "El nombre no puede contener números"
-    } else if(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/.test(form.nombre)){
-      nuevosErrores.nombre = "El nombre no puede contener caracteres especiales"
-    } else if (!/^[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)*$/.test(form.nombre)) {
-      nuevosErrores.nombre = "El nombre siempre debe comenzar con mayúscula y seguir en minúsculas";
+    } else if (/\d/.test(form.nombre)) {
+      nuevosErrores.nombre = "El nombre no puede contener números";
+    } else if (/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/.test(form.nombre)) {
+      nuevosErrores.nombre = "El nombre no puede contener caracteres especiales";
+    } else if (
+      !/^[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)*$/.test(
+        form.nombre
+      )
+    ) {
+      nuevosErrores.nombre =
+        "El nombre siempre debe comenzar con mayúscula y seguir en minúsculas";
     }
 
     if (!form.email.trim()) {
@@ -50,7 +53,6 @@ function Contacto() {
     }
 
     setErrores(nuevosErrores);
-
     return Object.keys(nuevosErrores).length === 0;
   };
 
@@ -58,16 +60,35 @@ function Contacto() {
     e.preventDefault();
 
     if (validar()) {
-      Swal.fire({
-        icon: "success",
-        title: "Formulario enviado",
-        text: "¡Gracias por tu mensaje, te responderemos pronto!",
-        confirmButtonText: "Cerrar",
-      });
+      emailjs
+        .send(
+          "service_08tvr2b",    // Reemplaza por tu Service ID
+          "template_rtnekqs",   // Reemplaza por tu Template ID
+          form,                 // Objeto con los datos del formulario
+          "nds4VxoFnAXwExNDU"   // Reemplaza por tu Public Key
+        )
+        .then(() => {
+          Swal.fire({
+            icon: "success",
+            title: "Formulario enviado",
+            text: "¡Gracias por tu mensaje, te responderemos pronto!",
+            confirmButtonText: "Cerrar",
+          });
 
-      setEnviado(true);
-      setForm({ nombre: "", email: "", mensaje: "" });
-      setErrores({});
+          setEnviado(true);
+          setForm({ nombre: "", email: "", mensaje: "" });
+          setErrores({});
+        })
+        .catch((error) => {
+          console.error("Error al enviar:", error);
+
+          Swal.fire({
+            icon: "error",
+            title: "Error al enviar",
+            text: "Hubo un problema al enviar el formulario. Inténtalo más tarde.",
+            confirmButtonText: "Cerrar",
+          });
+        });
     } else {
       Swal.fire({
         icon: "error",

@@ -10,6 +10,7 @@ import TerminosYCondiciones from './paginas/TerminosYCondiciones.jsx';
 import TareasGenerales from "./paginas/TareasGenerales";
 import MisTareas from "./paginas/MisTareas";
 
+<<<<<<< HEAD
 function Main() {
   const [tareasGenerales, setTareasGenerales] = useState([]);
   const [misTareas, setMisTareas] = useState(() => {
@@ -25,6 +26,14 @@ function Main() {
   }, []);
 
   useEffect(() => { 
+=======
+function App() {
+  const [misTareas, setMisTareas] = useState(() => {
+    return JSON.parse(localStorage.getItem("misTareas")) || [];
+  });
+
+  useEffect(() => {
+>>>>>>> main
     localStorage.setItem("misTareas", JSON.stringify(misTareas));
   }, [misTareas]);
 
@@ -46,6 +55,7 @@ function Main() {
   };
 
   return (
+<<<<<<< HEAD
     <main>
       <nav>
         <button onClick={() => setSeccion("tareasGenerales")}>Tareas Generales</button>
@@ -68,11 +78,37 @@ function Main() {
         />
       )}
     </main>
+=======
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path="/" element={
+          <TareasGenerales
+            misTareas={misTareas}
+            agregarTarea={agregarTarea}
+          />
+        } />
+        <Route path="/mistareas" element={
+          <MisTareas
+            misTareas={misTareas}
+            quitarTarea={quitarTarea}
+            actualizarPrioridad={actualizarPrioridad}
+          />
+        } />
+        <Route path="/sobreMi" element={<SobreMi />} />
+        <Route path="/contacto" element={<Contacto />} />
+        <Route path="/politicadeprivacidad" element={<PoliticaDePrivacidad />} />
+        <Route path="/terminos" element={<TerminosYCondiciones />} />
+      </Routes>
+      <Footer />
+    </BrowserRouter>
+>>>>>>> main
   );
 }
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
+<<<<<<< HEAD
     <BrowserRouter>
       <Header />
       <Routes>
@@ -87,3 +123,8 @@ createRoot(document.getElementById("root")).render(
     </BrowserRouter>
   </StrictMode>
 );
+=======
+    <App />
+  </StrictMode>
+);
+>>>>>>> main
