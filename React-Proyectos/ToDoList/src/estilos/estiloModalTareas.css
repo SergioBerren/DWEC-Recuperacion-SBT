@@ -1,0 +1,50 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-contenido {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+
+.modal-contenido input,
+.modal-contenido textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 8px;
+}
+
+.modal-botones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.modal-botones .btnCrearModificarTarea {
+  background-color: #198754;
+}
+
+.modal-botones .btnCancelarTarea {
+  background-color: #dc3545;
+}
+
+.modal-botones .btnCrearModificarTarea:hover {
+  background-color: #157347;
+}
+
+.modal-botones .btnCancelarTarea:hover {
+  background-color: #b02a37;
+}

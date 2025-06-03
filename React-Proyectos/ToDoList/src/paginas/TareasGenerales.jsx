@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import '../estilos/estiloTareasGenerales.css';
 import ServicioTareas from "../servicios/ServicioTareas";
+import ModalTarea from "./ModalTareas";/*"../paginas/ModalTarea";*/
 
 function TareasGenerales({ misTareas, agregarTarea }) {
   const [tareas, setTareas] = useState([]);
@@ -9,8 +10,8 @@ function TareasGenerales({ misTareas, agregarTarea }) {
   const [descripcion, setDescripcion] = useState("");
   const [modoEdicion, setModoEdicion] = useState(false);
   const [idEditar, setIdEditar] = useState(null);
+  const [modalAbierto, setModalAbierto] = useState(false);
 
-  // Cargar tareas al montar el componente
   useEffect(() => {
     ServicioTareas.getAll()
       .then(response => {
@@ -57,14 +58,13 @@ function TareasGenerales({ misTareas, agregarTarea }) {
               t.id === idEditar ? { ...t, ...tareaEditada } : t
             )
           );
-          resetFormulario();
+          cerrarModal();
         })
         .catch(error => {
           console.error("Error al modificar la tarea:", error);
           Swal.fire('Error', 'No se pudo modificar la tarea.', 'error');
         });
     } else {
-      // Crear nueva tarea
       const nuevaTarea = {
         titulo: titulo.trim(),
         descripcion: descripcion.trim(),
@@ -72,13 +72,9 @@ function TareasGenerales({ misTareas, agregarTarea }) {
 
       ServicioTareas.create(nuevaTarea)
         .then(response => {
-          Swal.fire({
-            icon: 'success',
-            title: 'Tarea creada',
-            text: 'La tarea fue agregada correctamente.',
-          });
+          Swal.fire('Creada', 'La tarea fue agregada correctamente.', 'success');
           setTareas(prev => [...prev, response.data]);
-          resetFormulario();
+          cerrarModal();
         })
         .catch(error => {
           console.error("Error al crear la tarea:", error);
@@ -114,6 +110,17 @@ function TareasGenerales({ misTareas, agregarTarea }) {
     setTitulo(tarea.titulo);
     setDescripcion(tarea.descripcion);
     setIdEditar(tarea.id);
+    setModalAbierto(true);
+  }
+
+  function abrirModalParaCrear() {
+    resetFormulario();
+    setModalAbierto(true);
+  }
+
+  function cerrarModal() {
+    resetFormulario();
+    setModalAbierto(false);
   }
 
   function resetFormulario() {
@@ -127,22 +134,18 @@ function TareasGenerales({ misTareas, agregarTarea }) {
     <section>
       <h2>Tareas Generales</h2>
 
-      <form onSubmit={crearTareas} className="formulario-tarea">
-        <input
-          type="text"
-          placeholder="Título"
-          value={titulo}
-          onChange={(e) => setTitulo(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Descripción"
-          value={descripcion}
-          onChange={(e) => setDescripcion(e.target.value)}
-        />
-        <button type="submit">{modoEdicion ? "Modificar Tarea" : "Crear Tarea"}</button>
-        {modoEdicion && <button type="button" onClick={resetFormulario}>Cancelar</button>}
-      </form>
+      <button className="btnAbrirModal" onClick={abrirModalParaCrear}>Nueva Tarea</button>
+
+      <ModalTarea
+        isOpen={modalAbierto}
+        onClose={cerrarModal}
+        onSubmit={crearTareas}
+        titulo={titulo}
+        descripcion={descripcion}
+        setTitulo={setTitulo}
+        setDescripcion={setDescripcion}
+        modoEdicion={modoEdicion}
+      />
 
       {Array.isArray(tareas) && tareas.length > 0 ? (
         tareas.map((tarea) => {
@@ -152,22 +155,13 @@ function TareasGenerales({ misTareas, agregarTarea }) {
               <p>
                 <strong>{tarea.titulo}</strong>: {tarea.descripcion}
               </p>
-              <button
-                onClick={() => agregarTarea(tarea)}
-                disabled={yaAsignada}
-              >
+              <button onClick={() => agregarTarea(tarea)} disabled={yaAsignada}>
                 Agregar tarea
               </button>
-              <button
-                onClick={() => editarTarea(tarea)}
-                className="btn-editar"
-              >
+              <button onClick={() => editarTarea(tarea)} className="btn-editar">
                 Modificar
               </button>
-              <button
-                onClick={() => eliminarTarea(tarea.id, tarea.titulo)}
-                className="btn-eliminar"
-              >
+              <button onClick={() => eliminarTarea(tarea.id, tarea.titulo)} className="btn-eliminar">
                 Eliminar
               </button>
               {yaAsignada && <span className="asignada">Asignada</span>}
