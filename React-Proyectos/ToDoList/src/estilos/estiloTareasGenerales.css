@@ -25,8 +25,13 @@ h2 {
   background: #f1f3f5;
 }
 
-/* Botón para agregar tarea */
-.tarea button {
+/* Botón general para tareas */
+.tarea button,
+.btnAbrirModal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px; /* Espacio entre icono y texto */
   background-color: #198754;
   color: white;
   border: none;
@@ -54,20 +59,34 @@ h2 {
   margin-left: 1rem;
 }
 
+/* Botón eliminar */
 .tarea button.btn-eliminar {
   background-color: #dc3545;
-  color: white;
 }
 
 .tarea button.btn-eliminar:hover {
   background-color: #b02a37;
 }
 
+/* Botón editar */
 .tarea button.btn-editar {
   background-color: #8A2BE2;
-  color: white;
 }
 
 .tarea button.btn-editar:hover {
   background-color: #4B0082;
+}
+
+/* Botón para abrir modal */
+.btnAbrirModal {
+  background-color: yellowgreen;
+  margin-bottom: 1rem;
+}
+
+/* Iconos en botones */
+.iconoEditar,
+.iconoBasura,
+.iconoAgregarTarea,
+.iconoNuevaTarea {
+  margin-right: 4px;
 }

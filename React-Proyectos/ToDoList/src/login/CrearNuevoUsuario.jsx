@@ -1,32 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';  // <-- Importa SweetAlert2
 import ServicioUsuario from '../servicios/ServicioUsuario.js';
 import '../estilos/estiloCrearNuevoUsuario.css';
 
 const CrearUsuario = () => {
   const [nombre, setNombre] = useState('');
   const [pass, setPass] = useState('');
-  const [error, setError] = useState('');
-  const [exito, setExito] = useState('');
 
   useEffect(() => {
-    // Añadir clase para evitar scroll
     document.body.classList.add('crear-usuario-page');
     return () => {
-      // Limpiar clase al desmontar componente
       document.body.classList.remove('crear-usuario-page');
     };
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-    setExito('');
 
     try {
       const existe = await ServicioUsuario.verificarExistenciaUsuario(nombre);
       if (existe.data.length > 0) {
-        setError("El usuario ya existe");
+        // Alerta de error
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'El usuario ya existe',
+        });
         return;
       }
 
@@ -37,12 +37,25 @@ const CrearUsuario = () => {
       };
 
       await ServicioUsuario.crearUsuario(nuevoUsuario);
-      setExito("Usuario creado exitosamente");
+
+      // Alerta de éxito
+      await Swal.fire({
+        icon: 'success',
+        title: '¡Éxito!',
+        text: 'Usuario creado exitosamente',
+        timer: 2000,
+        showConfirmButton: false,
+      });
+
       setNombre('');
       setPass('');
     } catch (error) {
       console.error("Error al crear usuario:", error);
-      setError("Error al crear el usuario");
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error al crear el usuario',
+      });
     }
   };
 
@@ -69,8 +82,6 @@ const CrearUsuario = () => {
               required
             />
           </div>
-          {error && <p className="login-error">{error}</p>}
-          {exito && <p className="login-success">{exito}</p>}
           <button type="submit">Crear Usuario</button>
         </form>
 

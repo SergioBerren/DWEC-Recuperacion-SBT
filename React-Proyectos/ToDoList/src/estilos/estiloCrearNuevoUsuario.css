@@ -77,24 +77,6 @@ body.crear-usuario-page {
   background-color: #0056b3;
 }
 
-/* Mensajes de error */
-.login-error {
-  color: #d9534f;
-  font-weight: 600;
-  margin-top: -0.5rem;
-  margin-bottom: 1rem;
-  text-align: center;
-}
-
-/* Mensajes de éxito */
-.login-success {
-  color: #28a745;
-  font-weight: 600;
-  margin-top: -0.5rem;
-  margin-bottom: 1rem;
-  text-align: center;
-}
-
 /* Enlace volver al login */
 .volver-login-link {
   display: block;

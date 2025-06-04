@@ -23,6 +23,12 @@
       "nombre": "agustin",
       "pass": "aguilera",
       "administrador": 1
+    },
+    {
+      "id": "1b49",
+      "nombre": "pedro",
+      "pass": "puerma",
+      "administrador": 0
     }
   ],
   "tareas": [

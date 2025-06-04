@@ -5,6 +5,9 @@ import ServicioTareas from "../servicios/ServicioTareas.js";
 import ModalTarea from "./ModalTareas.jsx";
 import { useAuth } from '../login/AuthProvider.jsx';
 
+// Importamos iconos de lucide-react
+import { FilePlus, PlusCircle, Edit2, Trash2 } from 'lucide-react';
+
 function TareasGenerales({ misTareas, agregarTarea }) {
   const [tareas, setTareas] = useState([]);
   const [titulo, setTitulo] = useState("");
@@ -13,7 +16,7 @@ function TareasGenerales({ misTareas, agregarTarea }) {
   const [idEditar, setIdEditar] = useState(null);
   const [modalAbierto, setModalAbierto] = useState(false);
 
-  const { user } = useAuth(); // Obtener usuario actual
+  const { user } = useAuth();
 
   useEffect(() => {
     ServicioTareas.getAll()
@@ -137,9 +140,9 @@ function TareasGenerales({ misTareas, agregarTarea }) {
     <section>
       <h2>Tareas Generales</h2>
 
-      {/* Botón visible solo para administradores */}
       {user?.administrador === 1 && (
         <button className="btnAbrirModal" onClick={abrirModalParaCrear}>
+          <PlusCircle size={20} className="iconoNuevaTarea" />
           Nueva Tarea
         </button>
       )}
@@ -164,16 +167,18 @@ function TareasGenerales({ misTareas, agregarTarea }) {
                 <strong>{tarea.titulo}</strong>: {tarea.descripcion}
               </p>
               <button onClick={() => agregarTarea(tarea)} disabled={yaAsignada}>
+                <FilePlus size={18} className="iconoAgregarTarea"/>
                 Agregar tarea
               </button>
 
-              {/* Solo para administradores */}
               {user?.administrador === 1 && (
                 <>
                   <button onClick={() => editarTarea(tarea)} className="btn-editar">
+                    <Edit2 size={18} className="iconoEditar" />
                     Modificar
                   </button>
                   <button onClick={() => eliminarTarea(tarea.id, tarea.titulo)} className="btn-eliminar">
+                    <Trash2 size={18} className="iconoBasura" />
                     Eliminar
                   </button>
                 </>
