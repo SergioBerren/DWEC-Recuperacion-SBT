@@ -1,4 +1,30 @@
 {
+  "usuarios": [
+    {
+      "id": "1",
+      "nombre": "sergio",
+      "pass": "123",
+      "administrador": 1
+    },
+    {
+      "id": "2",
+      "nombre": "carlos",
+      "pass": "0000",
+      "administrador": 0
+    },
+    {
+      "id": "3",
+      "nombre": "javier",
+      "pass": "puche",
+      "administrador": 0
+    },
+    {
+      "id": "4",
+      "nombre": "agustin",
+      "pass": "aguilera",
+      "administrador": 1
+    }
+  ],
   "tareas": [
     {
       "titulo": "Actualizar servidores",

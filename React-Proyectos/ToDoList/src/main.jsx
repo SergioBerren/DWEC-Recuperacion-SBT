@@ -1,29 +1,38 @@
-import React, { useState, useEffect, StrictMode } from "react";
+import React, { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+
 import Contacto from './paginas/Contacto.jsx';
 import SobreMi from './paginas/SobreMi.jsx';
 import Header from './componentes/Header.jsx';
 import Footer from './componentes/Footer.jsx';
 import PoliticaDePrivacidad from './paginas/PoliticaDePrivacidad.jsx';
 import TerminosYCondiciones from './paginas/TerminosYCondiciones.jsx';
-import TareasGenerales from "./paginas/TareasGenerales";
-import MisTareas from "./paginas/MisTareas";
+import TareasGenerales from "./paginas/TareasGenerales.jsx";
+import MisTareas from "./paginas/MisTareas.jsx";
+import Login from "./login/login.jsx";
+import RutaProtegida from "./login/RutasProtegidas.jsx";
+import { AuthProvider } from "./login/AuthProvider.jsx";
+import CrearNuevoUsuario from "./login/CrearNuevoUsuario.jsx";
 
-function App() {
-  const [tareasGenerales, setTareasGenerales] = useState([]);
-  const [misTareas, setMisTareas] = useState(() => {
+function AppContent() {
+  const location = useLocation();
+  const [tareasGenerales, setTareasGenerales] = React.useState([]);
+  const [misTareas, setMisTareas] = React.useState(() => {
     return JSON.parse(localStorage.getItem("misTareas")) || [];
   });
 
-  useEffect(() => {
+  // Ocultar header/footer
+  const ocultarHeaderFooter = location.pathname === "/login" || location.pathname === "/crear-usuario";
+
+  React.useEffect(() => {
     fetch("/json/tareas.json")
       .then((res) => res.json())
       .then(setTareasGenerales)
       .catch((err) => console.error("Error al cargar tareas:", err));
   }, []);
 
-  useEffect(() => { 
+  React.useEffect(() => {
     localStorage.setItem("misTareas", JSON.stringify(misTareas));
   }, [misTareas]);
 
@@ -45,35 +54,85 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
-      <Header />
+    <>
+      {!ocultarHeaderFooter && <Header />}
       <Routes>
-        <Route path="/" element={
-          <TareasGenerales
-            tareas={tareasGenerales}
-            misTareas={misTareas}
-            agregarTarea={agregarTarea}
-          />
-        } />
-        <Route path="/mistareas" element={
-          <MisTareas
-            misTareas={misTareas}
-            quitarTarea={quitarTarea}
-            actualizarPrioridad={actualizarPrioridad}
-          />
-        } />
-        <Route path="/sobreMi" element={<SobreMi />} />
-        <Route path="/contacto" element={<Contacto />} />
-        <Route path="/politicadeprivacidad" element={<PoliticaDePrivacidad />} />
-        <Route path="/terminos" element={<TerminosYCondiciones />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/crear-usuario" element={<CrearNuevoUsuario />} /> {/* ✅ NUEVA RUTA */}
+        <Route
+          path="/"
+          element={
+            <RutaProtegida>
+              <TareasGenerales
+                tareas={tareasGenerales}
+                misTareas={misTareas}
+                agregarTarea={agregarTarea}
+              />
+            </RutaProtegida>
+          }
+        />
+        <Route
+          path="/mistareas"
+          element={
+            <RutaProtegida>
+              <MisTareas
+                misTareas={misTareas}
+                quitarTarea={quitarTarea}
+                actualizarPrioridad={actualizarPrioridad}
+              />
+            </RutaProtegida>
+          }
+        />
+        <Route
+          path="/sobreMi"
+          element={
+            <RutaProtegida>
+              <SobreMi />
+            </RutaProtegida>
+          }
+        />
+        <Route
+          path="/contacto"
+          element={
+            <RutaProtegida>
+              <Contacto />
+            </RutaProtegida>
+          }
+        />
+        <Route
+          path="/politicadeprivacidad"
+          element={
+            <RutaProtegida>
+              <PoliticaDePrivacidad />
+            </RutaProtegida>
+          }
+        />
+        <Route
+          path="/terminos"
+          element={
+            <RutaProtegida>
+              <TerminosYCondiciones />
+            </RutaProtegida>
+          }
+        />
       </Routes>
-      <Footer />
+      {!ocultarHeaderFooter && <Footer />}
+    </>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
     </BrowserRouter>
   );
 }
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
+    <AuthProvider>
+      <App />
+    </AuthProvider>
   </StrictMode>
 );

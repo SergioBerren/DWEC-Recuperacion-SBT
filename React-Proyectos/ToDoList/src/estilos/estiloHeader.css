@@ -50,3 +50,67 @@
 body {
   padding-top: 4rem;  /* Deja espacio para el header fijo */
 }
+
+
+
+
+
+/* Contenedor para la foto de perfil y el menú desplegable */
+.perfil-dropdown {
+  position: absolute;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Botón que contiene la imagen */
+.btn-foto {
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 0;
+}
+
+/* Estilo de la foto de perfil */
+.foto-perfil {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+  transition: transform 0.2s ease;
+}
+
+.foto-perfil:hover {
+  transform: scale(1.05);
+}
+
+/* Menú desplegable estilo select */
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 50px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 8px 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  z-index: 1100;
+  min-width: 150px;
+}
+
+.dropdown-menu button {
+  background: none;
+  border: none;
+  color: #333;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 10px 16px;
+  width: 100%;
+  text-align: left;
+}
+
+.dropdown-menu button:hover {
+  background-color: #f0f0f0;
+}

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import '../estilos/estiloTareasGenerales.css';
-import ServicioTareas from "../servicios/ServicioTareas";
-import ModalTarea from "./ModalTareas";/*"../paginas/ModalTarea";*/
+import ServicioTareas from "../servicios/ServicioTareas.js";
+import ModalTarea from "./ModalTareas.jsx";
+import { useAuth } from '../login/AuthProvider.jsx';
 
 function TareasGenerales({ misTareas, agregarTarea }) {
   const [tareas, setTareas] = useState([]);
@@ -11,6 +12,8 @@ function TareasGenerales({ misTareas, agregarTarea }) {
   const [modoEdicion, setModoEdicion] = useState(false);
   const [idEditar, setIdEditar] = useState(null);
   const [modalAbierto, setModalAbierto] = useState(false);
+
+  const { user } = useAuth(); // Obtener usuario actual
 
   useEffect(() => {
     ServicioTareas.getAll()
@@ -134,7 +137,12 @@ function TareasGenerales({ misTareas, agregarTarea }) {
     <section>
       <h2>Tareas Generales</h2>
 
-      <button className="btnAbrirModal" onClick={abrirModalParaCrear}>Nueva Tarea</button>
+      {/* Botón visible solo para administradores */}
+      {user?.administrador === 1 && (
+        <button className="btnAbrirModal" onClick={abrirModalParaCrear}>
+          Nueva Tarea
+        </button>
+      )}
 
       <ModalTarea
         isOpen={modalAbierto}
@@ -158,12 +166,19 @@ function TareasGenerales({ misTareas, agregarTarea }) {
               <button onClick={() => agregarTarea(tarea)} disabled={yaAsignada}>
                 Agregar tarea
               </button>
-              <button onClick={() => editarTarea(tarea)} className="btn-editar">
-                Modificar
-              </button>
-              <button onClick={() => eliminarTarea(tarea.id, tarea.titulo)} className="btn-eliminar">
-                Eliminar
-              </button>
+
+              {/* Solo para administradores */}
+              {user?.administrador === 1 && (
+                <>
+                  <button onClick={() => editarTarea(tarea)} className="btn-editar">
+                    Modificar
+                  </button>
+                  <button onClick={() => eliminarTarea(tarea.id, tarea.titulo)} className="btn-eliminar">
+                    Eliminar
+                  </button>
+                </>
+              )}
+
               {yaAsignada && <span className="asignada">Asignada</span>}
             </div>
           );

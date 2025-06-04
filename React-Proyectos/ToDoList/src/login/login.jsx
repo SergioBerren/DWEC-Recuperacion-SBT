@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from './AuthProvider';
-import ServicioUsuario from '../servicios/ServicioUsuario';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { useAuth } from './AuthProvider.jsx';
+import ServicioUsuario from '../servicios/ServicioUsuario.js';
+import '../estilos/estiloLogin.css';
 
 const Login = () => {
   const [usuario, setUsuario] = useState('');
@@ -11,66 +11,74 @@ const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-  
-    e.preventDefault();
-  
-    ServicioUsuario.login(usuario,password)
-      .then((response) => {
-       if(response.data.length !== 0 ){        
-        login(response.data[0].nombre);
-        navigate('/'); 
-        // let idCheck = document.getElementById("check")
-        // idCheck.addEventListener("click", generarToken)
-        function generarToken() {
-          let token = Math.round(Math.random()*100000)
-        }
+  useEffect(() => {
+    document.body.classList.add('login-page');
+    return () => {
+      document.body.classList.remove('login-page');
+    };
+  }, []);
 
-        if(generarToken.token !== null) {
-          console.log("Comprobar que existe el token")
-          localStorage.setItem("usuario", JSON.stringify(usuario));
-          localStorage.setItem("pass", JSON.stringify(password));
-        }
-        
-       }else {
-        
-        setError("Usuario no es correcto")
-       }
-       
-        
-      })
-      .catch((error) => {   
-        alert(error)                 
-       navigate('/login'); 
-      });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await ServicioUsuario.login(usuario, password);
+      const usuariosEncontrados = response.data;
+
+      if (usuariosEncontrados.length !== 0) {
+        const mantenerSesion = document.getElementById("mantenerSesion").checked;
+        const userData = usuariosEncontrados[0];
+
+        login(userData, mantenerSesion);
+        navigate('/');
+      } else {
+        setError("Usuario o contraseña incorrectos");
+      }
+    } catch (error) {
+      console.error("Error de login:", error);
+      alert("Ocurrió un error al iniciar sesión");
+      navigate('/login');
+    }
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Usuario</label>
-          <input
-            type="text"
-            value={usuario}
-            onChange={(e) => setUsuario(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button type="submit">Login</button><br/>
-        <input type="checkbox" /><label>Mantener Sesión iniciada</label>
-      </form>
+    <div className="login-wrapper">
+      <div className="login-box">
+        <h2>Iniciar Sesión</h2>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="usuario">Usuario</label>
+            <input
+              id="usuario"
+              type="text"
+              value={usuario}
+              onChange={(e) => setUsuario(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="password">Contraseña</label>
+            <input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          {error && <p className="login-error">{error}</p>}
+          <div className="login-checkbox">
+            <input type="checkbox" id="mantenerSesion" />
+            <label htmlFor="mantenerSesion">Mantener sesión iniciada</label>
+          </div>
+          <button type="submit">Iniciar Sesión</button>
+
+          {/* 🔗 Enlace para crear nuevo usuario */}
+          <p className="crear-cuenta">
+            ¿No tienes cuenta? <Link to="/crear-usuario">Crea una aquí</Link>
+          </p>
+        </form>
+      </div>
     </div>
   );
 };
