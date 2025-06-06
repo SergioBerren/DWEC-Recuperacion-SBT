@@ -1,34 +1,10 @@
 {
   "usuarios": [
     {
-      "id": "1",
-      "nombre": "sergio",
-      "pass": "123",
+      "id": "28a6",
+      "nombre": "Sergio",
+      "pass": "$2b$10$kxYBoQJm3bxf.9kGj/gccew/UsePEnnq8k9gejvMtwFbWmWG.HvXS",
       "administrador": 1
-    },
-    {
-      "id": "2",
-      "nombre": "carlos",
-      "pass": "0000",
-      "administrador": 0
-    },
-    {
-      "id": "3",
-      "nombre": "javier",
-      "pass": "puche",
-      "administrador": 0
-    },
-    {
-      "id": "4",
-      "nombre": "agustin",
-      "pass": "aguilera",
-      "administrador": 1
-    },
-    {
-      "id": "1b49",
-      "nombre": "pedro",
-      "pass": "puerma",
-      "administrador": 0
     }
   ],
   "tareas": [

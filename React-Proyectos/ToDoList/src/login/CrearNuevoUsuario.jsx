@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Swal from 'sweetalert2';  // <-- Importa SweetAlert2
+import Swal from 'sweetalert2';
 import ServicioUsuario from '../servicios/ServicioUsuario.js';
 import '../estilos/estiloCrearNuevoUsuario.css';
+import bcrypt from 'bcryptjs';
 
 const CrearUsuario = () => {
   const [nombre, setNombre] = useState('');
@@ -21,7 +22,6 @@ const CrearUsuario = () => {
     try {
       const existe = await ServicioUsuario.verificarExistenciaUsuario(nombre);
       if (existe.data.length > 0) {
-        // Alerta de error
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
@@ -30,15 +30,16 @@ const CrearUsuario = () => {
         return;
       }
 
+      const hashedPassword = await bcrypt.hash(pass, 10);
+
       const nuevoUsuario = {
         nombre,
-        pass,
+        pass: hashedPassword,
         administrador: 0,
       };
 
       await ServicioUsuario.crearUsuario(nuevoUsuario);
 
-      // Alerta de éxito
       await Swal.fire({
         icon: 'success',
         title: '¡Éxito!',

@@ -1,14 +1,14 @@
 import http from "./http-axios.js";
 
 class ServicioUsuario {
-   getAll() {
-     return http.get("/tareas");
-   }
+  getAll() {
+    return http.get("/tareas");
+  }
 
-  login(usuario,pass) {
-      return http.get(`/usuarios?nombre=${usuario}&pass=${pass}`);
-      //http://localhost:3000/usuarios?nombre=agustin&pass=123
-   }
+  // Nuevo método: login sin pasar contraseña en la URL
+  getUsuarioPorNombre(nombre) {
+    return http.get(`/usuarios?nombre=${nombre}`);
+  }
 
   verificarExistenciaUsuario(nombre) {
     return http.get(`/usuarios?nombre=${nombre}`);

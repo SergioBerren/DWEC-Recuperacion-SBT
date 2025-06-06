@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from './AuthProvider.jsx';
 import ServicioUsuario from '../servicios/ServicioUsuario.js';
+import bcrypt from 'bcryptjs';
 import '../estilos/estiloLogin.css';
 
 const Login = () => {
@@ -22,14 +23,20 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await ServicioUsuario.login(usuario, password);
-      const usuariosEncontrados = response.data;
+      const response = await ServicioUsuario.getUsuarioPorNombre(usuario);
+      const usuarios = response.data;
 
-      if (usuariosEncontrados.length !== 0) {
+      if (usuarios.length === 0) {
+        setError("Usuario o contraseña incorrectos");
+        return;
+      }
+
+      const usuarioEncontrado = usuarios[0];
+      const coincide = await bcrypt.compare(password, usuarioEncontrado.pass);
+
+      if (coincide) {
         const mantenerSesion = document.getElementById("mantenerSesion").checked;
-        const userData = usuariosEncontrados[0];
-
-        login(userData, mantenerSesion);
+        login(usuarioEncontrado, mantenerSesion);
         navigate('/');
       } else {
         setError("Usuario o contraseña incorrectos");
@@ -37,7 +44,6 @@ const Login = () => {
     } catch (error) {
       console.error("Error de login:", error);
       alert("Ocurrió un error al iniciar sesión");
-      navigate('/login');
     }
   };
 
@@ -72,8 +78,6 @@ const Login = () => {
             <label htmlFor="mantenerSesion">Mantener sesión iniciada</label>
           </div>
           <button type="submit">Iniciar Sesión</button>
-
-          {/* 🔗 Enlace para crear nuevo usuario */}
           <p className="crear-cuenta">
             ¿No tienes cuenta? <Link to="/crear-usuario">Crea una aquí</Link>
           </p>
