@@ -62,10 +62,10 @@ function Contacto() {
     if (validar()) {
       emailjs
         .send(
-          "service_08tvr2b",    // Reemplaza por tu Service ID
-          "template_rtnekqs",   // Reemplaza por tu Template ID
+          "service_speca54",//"service_08tvr2b",    // Reemplaza por tu Service ID
+          "template_xzause5",//"template_rtnekqs",   // Reemplaza por tu Template ID
           form,                 // Objeto con los datos del formulario
-          "nds4VxoFnAXwExNDU"   // Reemplaza por tu Public Key
+          "kabEovyNiPWn1qtIA"// "nds4VxoFnAXwExNDU"   // Reemplaza por tu Public Key
         )
         .then(() => {
           Swal.fire({

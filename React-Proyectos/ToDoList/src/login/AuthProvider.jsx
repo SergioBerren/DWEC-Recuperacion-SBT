@@ -4,7 +4,7 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true); // ← NUEVO
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const recuperarUsuario = () => {
@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
       setUser(usuarioGuardado);
     }
 
-    setLoading(false); // ← IMPORTANTE
+    setLoading(false);
   }, []);
 
   const login = (userData, mantenerSesion = false) => {

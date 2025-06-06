@@ -1,13 +1,7 @@
 Sobre Mi (Puedo hacer un sobre mi de la aplicación o un sobre mi personalizado según el login)
 
-Añadir librería lucide o alguna con iconos (?)
-
-Tocar EmailJS y mi correo secundario (Para dar una mejor apariencia)
-
 Añadir una página 404 (?)
 
 Mejorar css
 
-Añadir crear nuevo usuario (?)
-
-Añadir opciones al perfil (?)
+Hashear contraseña de la base de datos y mediante un get comparar con el formulario

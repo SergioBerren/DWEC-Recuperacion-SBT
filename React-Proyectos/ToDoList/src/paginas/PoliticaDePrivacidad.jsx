@@ -60,7 +60,7 @@ function PoliticaDePrivacidad() {
         <section className="seccion-politica">
           <h2>6. Contacto</h2>
           <p>Para preguntas sobre esta política:</p>
-          <p>Email: <Link to="/contacto" className="link-contacto">privacidad@tasksmaster.com</Link></p>
+          <p>Email: <Link to="/contacto" className="link-contacto">soportetaskmaster@gmail.com</Link></p>
         </section>
 
         <div className="volver-inicio">
