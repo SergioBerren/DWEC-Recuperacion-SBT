@@ -4,12 +4,12 @@ import '../estilos/estiloPoliticaDePrivacidad.css';
 function PoliticaDePrivacidad() {
     return (
       <div className="politica-container">
-        <h1>Política de Privacidad de TasksMaster</h1>
+        <h1>Política de Privacidad de TaskMaster</h1>
         <p className="fecha-actualizacion">Última actualización: {new Date().toLocaleDateString()}</p>
         
         <section className="seccion-politica">
           <h2>1. Información que Recopilamos</h2>
-          <p>En TasksMaster, recopilamos la siguiente información cuando usas nuestra aplicación:</p>
+          <p>En TaskMaster, recopilamos la siguiente información cuando usas nuestra aplicación:</p>
           <ul>
             <li>Información de registro (nombre, email)</li>
             <li>Tareas y listas que creas</li>

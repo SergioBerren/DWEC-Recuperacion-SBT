@@ -1,5 +1,5 @@
 import React, { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 
 import Contacto from './paginas/Contacto.jsx';
@@ -12,19 +12,21 @@ import TareasGenerales from "./paginas/TareasGenerales.jsx";
 import MisTareas from "./paginas/MisTareas.jsx";
 import Login from "./login/login.jsx";
 import RutaProtegida from "./login/RutasProtegidas.jsx";
-import { AuthProvider } from "./login/AuthProvider.jsx";
+import { AuthProvider, useAuth } from "./login/AuthProvider.jsx";
 import CrearNuevoUsuario from "./login/CrearNuevoUsuario.jsx";
 
-function AppContent() {
+function MainApp() {
   const location = useLocation();
+  const { user } = useAuth();
+
   const [tareasGenerales, setTareasGenerales] = React.useState([]);
-  const [misTareas, setMisTareas] = React.useState(() => {
-    return JSON.parse(localStorage.getItem("misTareas")) || [];
-  });
+  const [misTareas, setMisTareas] = React.useState([]);
+  const [tareasAsignadas, setTareasAsignadas] = React.useState({});
 
-  // Ocultar header/footer
-  const ocultarHeaderFooter = location.pathname === "/login" || location.pathname === "/crear-usuario";
+  const ocultarHeaderFooter =
+    location.pathname === "/login" || location.pathname === "/crear-usuario";
 
+  // Cargar tareas desde JSON local
   React.useEffect(() => {
     fetch("/json/tareas.json")
       .then((res) => res.json())
@@ -32,19 +34,53 @@ function AppContent() {
       .catch((err) => console.error("Error al cargar tareas:", err));
   }, []);
 
+  // Cargar tareas del usuario desde localStorage
   React.useEffect(() => {
-    localStorage.setItem("misTareas", JSON.stringify(misTareas));
-  }, [misTareas]);
+    if (user) {
+      const guardadas = localStorage.getItem(`misTareas_${user.nombre}`);
+      setMisTareas(guardadas ? JSON.parse(guardadas) : []);
+    }
+  }, [user]);
+
+  // Cargar tareas asignadas globales desde localStorage
+  React.useEffect(() => {
+    const data = localStorage.getItem("tareasAsignadas");
+    setTareasAsignadas(data ? JSON.parse(data) : {});
+  }, []);
+
+  // Guardar tareas del usuario en localStorage
+  React.useEffect(() => {
+    if (user) {
+      localStorage.setItem(`misTareas_${user.nombre}`, JSON.stringify(misTareas));
+    }
+  }, [misTareas, user]);
+
+  // Guardar tareas asignadas globales en localStorage
+  React.useEffect(() => {
+    localStorage.setItem("tareasAsignadas", JSON.stringify(tareasAsignadas));
+  }, [tareasAsignadas]);
 
   const agregarTarea = (tarea) => {
-    if (misTareas.some((t) => t.titulo === tarea.titulo)) return;
+    if (tareasAsignadas[tarea.titulo]) {
+      alert(`La tarea "${tarea.titulo}" ya está asignada a ${tareasAsignadas[tarea.titulo]}`);
+      return;
+    }
+
     setMisTareas([...misTareas, { ...tarea, prioridad: "Media" }]);
+    setTareasAsignadas({ ...tareasAsignadas, [tarea.titulo]: user.nombre });
   };
 
   const quitarTarea = (index) => {
+    const tareaQuitada = misTareas[index];
     const nuevasTareas = [...misTareas];
     nuevasTareas.splice(index, 1);
     setMisTareas(nuevasTareas);
+
+    const nuevasAsignadas = { ...tareasAsignadas };
+    if (tareasAsignadas[tareaQuitada.titulo] === user.nombre) {
+      delete nuevasAsignadas[tareaQuitada.titulo];
+      setTareasAsignadas(nuevasAsignadas);
+    }
   };
 
   const actualizarPrioridad = (index, nuevaPrioridad) => {
@@ -58,7 +94,8 @@ function AppContent() {
       {!ocultarHeaderFooter && <Header />}
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/crear-usuario" element={<CrearNuevoUsuario />} /> {/* ✅ NUEVA RUTA */}
+        <Route path="/crear-usuario" element={<CrearNuevoUsuario />} />
+
         <Route
           path="/"
           element={
@@ -66,11 +103,13 @@ function AppContent() {
               <TareasGenerales
                 tareas={tareasGenerales}
                 misTareas={misTareas}
+                tareasAsignadas={tareasAsignadas}
                 agregarTarea={agregarTarea}
               />
             </RutaProtegida>
           }
         />
+
         <Route
           path="/mistareas"
           element={
@@ -83,6 +122,7 @@ function AppContent() {
             </RutaProtegida>
           }
         />
+
         <Route
           path="/sobreMi"
           element={
@@ -91,6 +131,7 @@ function AppContent() {
             </RutaProtegida>
           }
         />
+
         <Route
           path="/contacto"
           element={
@@ -99,6 +140,7 @@ function AppContent() {
             </RutaProtegida>
           }
         />
+
         <Route
           path="/politicadeprivacidad"
           element={
@@ -107,6 +149,7 @@ function AppContent() {
             </RutaProtegida>
           }
         />
+
         <Route
           path="/terminos"
           element={
@@ -121,18 +164,13 @@ function AppContent() {
   );
 }
 
-function App() {
-  return (
-    <BrowserRouter>
-      <AppContent />
-    </BrowserRouter>
-  );
-}
-
-createRoot(document.getElementById("root")).render(
+// Renderizar app completa
+ReactDOM.createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <AuthProvider>
-      <App />
-    </AuthProvider>
+    <BrowserRouter>
+      <AuthProvider>
+        <MainApp />
+      </AuthProvider>
+    </BrowserRouter>
   </StrictMode>
 );

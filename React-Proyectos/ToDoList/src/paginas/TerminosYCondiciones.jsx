@@ -4,17 +4,17 @@ import '../estilos/estiloTerminosYCondiciones.css';
 function TerminosYCondiciones() {
     return (
       <div className="terminos-container">
-        <h1>Términos y Condiciones de TasksMaster</h1>
+        <h1>Términos y Condiciones de TaskMaster</h1>
         <p className="fecha-actualizacion">Última actualización: {new Date().toLocaleDateString()}</p>
         
         <section className="seccion-terminos">
           <h2>1. Aceptación de los Términos</h2>
-          <p>Al utilizar TasksMaster, aceptas cumplir con estos términos y nuestra <Link to="/politicadeprivacidad" className="link-interno">Política de Privacidad</Link>.</p>
+          <p>Al utilizar TaskMaster, aceptas cumplir con estos términos y nuestra <Link to="/politicadeprivacidad" className="link-interno">Política de Privacidad</Link>.</p>
         </section>
 
         <section className="seccion-terminos">
           <h2>2. Uso del Servicio</h2>
-          <p>TasksMaster te permite:</p>
+          <p>TaskMaster te permite:</p>
           <ul>
             <li>Crear y gestionar listas de tareas</li>
             <li>Organizar tus actividades personales o profesionales</li>
@@ -49,7 +49,7 @@ function TerminosYCondiciones() {
 
         <section className="seccion-terminos">
           <h2>5. Limitación de Responsabilidad</h2>
-          <p>TasksMaster no será responsable por:</p>
+          <p>TaskMaster no será responsable por:</p>
           <ul>
             <li>Pérdida de datos debido a fallos técnicos</li>
             <li>Daños indirectos o consecuenciales</li>

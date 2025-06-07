@@ -5,6 +5,12 @@
       "nombre": "Sergio",
       "pass": "$2b$10$kxYBoQJm3bxf.9kGj/gccew/UsePEnnq8k9gejvMtwFbWmWG.HvXS",
       "administrador": 1
+    },
+    {
+      "id": "e7e1",
+      "nombre": "agustin",
+      "pass": "$2b$10$euo.SCTwSCw8mTA4m5qQPuAeQ1ZWMbm3DVjibIMtWvgN9HcBHqAgC",
+      "administrador": 0
     }
   ],
   "tareas": [

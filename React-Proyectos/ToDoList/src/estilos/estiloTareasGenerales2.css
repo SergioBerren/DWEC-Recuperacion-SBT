@@ -1,0 +1,114 @@
+/*
+Este css es simplemente para pruebas, solo se usa en TareasGenerales2.jsx y ese JSX no se utiliza nunca
+*/
+/* Sección principal */
+section {
+  margin-bottom: 2rem;
+}
+
+h2 {
+  color: #343a40;
+  margin-bottom: 1rem;
+}
+
+/* Contenedor de cada tarea */
+.tarea {
+  background: #ffffff;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: background 0.3s;
+}
+
+.tarea:hover {
+  background: #f1f3f5;
+}
+
+/* Contenedor de contenido alineado horizontalmente */
+.contenido-tarea {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* Texto de la tarea */
+.texto-tarea {
+  margin: 0;
+}
+
+/* Contenedor de botones + asignada */
+.acciones-tarea {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Botón general para tareas */
+.tarea button,
+.btnAbrirModal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background-color: #198754;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.3s;
+}
+
+.tarea button:disabled {
+  background-color: #adb5bd;
+  cursor: not-allowed;
+}
+
+.tarea button:not(:disabled):hover {
+  background-color: #157347;
+}
+
+/* Botón eliminar */
+.tarea button.btn-eliminar {
+  background-color: #dc3545;
+}
+
+.tarea button.btn-eliminar:hover {
+  background-color: #b02a37;
+}
+
+/* Botón editar */
+.tarea button.btn-editar {
+  background-color: #8A2BE2;
+}
+
+.tarea button.btn-editar:hover {
+  background-color: #4B0082;
+}
+
+/* Botón para abrir modal */
+.btnAbrirModal {
+  background-color: yellowgreen;
+  margin-bottom: 1rem;
+}
+
+/* Iconos en botones */
+.iconoEditar,
+.iconoBasura,
+.iconoAgregarTarea,
+.iconoNuevaTarea {
+  margin-right: 4px;
+}
+
+/* Texto Asignada */
+.asignada {
+  color: #0d6efd;
+  font-weight: bold;
+  margin-left: 0.5rem;
+}

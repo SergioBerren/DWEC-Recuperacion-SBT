@@ -1,13 +1,19 @@
+/*
+Este JSX está para hacer pruebas de estilo, es identico a TareasGenerales,
+solo cambia la estructura del HTML y no se está utilizando en ningún momento,
+es simplemente para pruebas.
+*/
+
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-import '../estilos/estiloTareasGenerales.css';
+import '../estilos/estiloTareasGenerales2.css';
 import ServicioTareas from "../servicios/ServicioTareas.js";
 import ModalTarea from "./ModalTareas.jsx";
 import { useAuth } from '../login/AuthProvider.jsx';
 
 import { FilePlus, PlusCircle, Edit2, Trash2 } from 'lucide-react';
 
-function TareasGenerales({ misTareas, agregarTarea, tareasAsignadas }) {
+function TareasGenerales({ misTareas, agregarTarea }) {
   const [tareas, setTareas] = useState([]);
   const [titulo, setTitulo] = useState("");
   const [descripcion, setDescripcion] = useState("");
@@ -49,16 +55,20 @@ function TareasGenerales({ misTareas, agregarTarea, tareasAsignadas }) {
       return;
     }
 
-    const tarea = {
-      titulo: titulo.trim(),
-      descripcion: descripcion.trim(),
-    };
-
     if (modoEdicion) {
-      ServicioTareas.update(idEditar, tarea)
+      const tareaEditada = {
+        titulo: titulo.trim(),
+        descripcion: descripcion.trim(),
+      };
+
+      ServicioTareas.update(idEditar, tareaEditada)
         .then(() => {
           Swal.fire('Actualizada', 'La tarea fue modificada.', 'success');
-          setTareas(prev => prev.map(t => t.id === idEditar ? { ...t, ...tarea } : t));
+          setTareas(prev =>
+            prev.map(t =>
+              t.id === idEditar ? { ...t, ...tareaEditada } : t
+            )
+          );
           cerrarModal();
         })
         .catch(error => {
@@ -66,7 +76,12 @@ function TareasGenerales({ misTareas, agregarTarea, tareasAsignadas }) {
           Swal.fire('Error', 'No se pudo modificar la tarea.', 'error');
         });
     } else {
-      ServicioTareas.create(tarea)
+      const nuevaTarea = {
+        titulo: titulo.trim(),
+        descripcion: descripcion.trim(),
+      };
+
+      ServicioTareas.create(nuevaTarea)
         .then(response => {
           Swal.fire('Creada', 'La tarea fue agregada correctamente.', 'success');
           setTareas(prev => [...prev, response.data]);
@@ -79,7 +94,7 @@ function TareasGenerales({ misTareas, agregarTarea, tareasAsignadas }) {
     }
   }
 
-  function eliminarTarea(id, tituloEliminar) {
+  function eliminarTarea(idEliminar, tituloEliminar) {
     Swal.fire({
       title: `¿Eliminar tarea "${tituloEliminar}"?`,
       icon: 'warning',
@@ -88,10 +103,10 @@ function TareasGenerales({ misTareas, agregarTarea, tareasAsignadas }) {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        ServicioTareas.delete(id)
+        ServicioTareas.delete(idEliminar)
           .then(() => {
             Swal.fire('Eliminada', 'La tarea fue eliminada.', 'success');
-            setTareas(prev => prev.filter(t => t.id !== id));
+            setTareas(prev => prev.filter(t => t.id !== idEliminar));
           })
           .catch(error => {
             console.error("Error al eliminar la tarea:", error);
@@ -150,36 +165,36 @@ function TareasGenerales({ misTareas, agregarTarea, tareasAsignadas }) {
 
       {Array.isArray(tareas) && tareas.length > 0 ? (
         tareas.map((tarea) => {
-          const asignadoA = tareasAsignadas?.[tarea.titulo];
-          const yaEsMia = misTareas.some((t) => t.titulo === tarea.titulo);
-
+          const yaAsignada = misTareas.some((t) => t.titulo === tarea.titulo);
           return (
             <div key={tarea.id} className="tarea">
-              <p>
-                <strong>{tarea.titulo}</strong>: {tarea.descripcion}
-              </p>
+              <div className="contenido-tarea">
+                <p className="texto-tarea">
+                  <strong>{tarea.titulo}</strong>: {tarea.descripcion}
+                </p>
 
-              {asignadoA ? (
-                <span className="asignada">Asignada a: {asignadoA}</span>
-              ) : (
-                <button onClick={() => agregarTarea(tarea)} disabled={yaEsMia}>
-                  <FilePlus size={18} className="iconoAgregarTarea" />
-                  Agregar tarea
-                </button>
-              )}
+                <div className="acciones-tarea">
+                  <button onClick={() => agregarTarea(tarea)} disabled={yaAsignada}>
+                    <FilePlus size={18} className="iconoAgregarTarea" />
+                    Agregar tarea
+                  </button>
 
-              {user?.administrador === 1 && (
-                <>
-                  <button onClick={() => editarTarea(tarea)} className="btn-editar">
-                    <Edit2 size={18} className="iconoEditar" />
-                    Modificar
-                  </button>
-                  <button onClick={() => eliminarTarea(tarea.id, tarea.titulo)} className="btn-eliminar">
-                    <Trash2 size={18} className="iconoBasura" />
-                    Eliminar
-                  </button>
-                </>
-              )}
+                  {user?.administrador === 1 && (
+                    <>
+                      <button onClick={() => editarTarea(tarea)} className="btn-editar">
+                        <Edit2 size={18} className="iconoEditar" />
+                        Modificar
+                      </button>
+                      <button onClick={() => eliminarTarea(tarea.id, tarea.titulo)} className="btn-eliminar">
+                        <Trash2 size={18} className="iconoBasura" />
+                        Eliminar
+                      </button>
+                    </>
+                  )}
+
+                  {yaAsignada && <span className="asignada">Asignada</span>}
+                </div>
+              </div>
             </div>
           );
         })

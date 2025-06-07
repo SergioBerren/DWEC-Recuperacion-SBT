@@ -10,7 +10,7 @@ function Footer() {
         <Link to="/terminos" className="nav-link">Términos y Condiciones</Link>
         <Link to="/contacto" className="nav-link">Contacto</Link>
       </div>
-      <p className="footer-text">© 2025 TasksMaster. Todos los derechos reservados.</p>
+      <p className="footer-text">© 2025 TaskMaster. Todos los derechos reservados.</p>
     </footer>
   );
 }
