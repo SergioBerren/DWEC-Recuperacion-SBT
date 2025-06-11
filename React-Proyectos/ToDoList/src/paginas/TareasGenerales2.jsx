@@ -145,7 +145,7 @@ function TareasGenerales({ misTareas, agregarTarea }) {
     <section>
       <h2>Tareas Generales</h2>
 
-      {user?.administrador === 1 && (
+      {user?.administrador === 1 && (  // {user && user.administrador === 1 && ()}
         <button className="btnAbrirModal" onClick={abrirModalParaCrear}>
           <PlusCircle size={20} className="iconoNuevaTarea" />
           Nueva Tarea

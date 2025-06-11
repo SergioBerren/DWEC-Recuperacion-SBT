@@ -1,5 +1,5 @@
 import React, { StrictMode } from "react";
-import ReactDOM from 'react-dom/client';
+import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 
 import Contacto from './paginas/Contacto.jsx';
@@ -14,6 +14,7 @@ import Login from "./login/login.jsx";
 import RutaProtegida from "./login/RutasProtegidas.jsx";
 import { AuthProvider, useAuth } from "./login/AuthProvider.jsx";
 import CrearNuevoUsuario from "./login/CrearNuevoUsuario.jsx";
+import PaginaNoEncontrada from "./paginas/PaginaNoEncontrada.jsx";
 
 function MainApp() {
   const location = useLocation();
@@ -26,7 +27,6 @@ function MainApp() {
   const ocultarHeaderFooter =
     location.pathname === "/login" || location.pathname === "/crear-usuario";
 
-  // Cargar tareas desde JSON local
   React.useEffect(() => {
     fetch("/json/tareas.json")
       .then((res) => res.json())
@@ -34,7 +34,6 @@ function MainApp() {
       .catch((err) => console.error("Error al cargar tareas:", err));
   }, []);
 
-  // Cargar tareas del usuario desde localStorage
   React.useEffect(() => {
     if (user) {
       const guardadas = localStorage.getItem(`misTareas_${user.nombre}`);
@@ -42,20 +41,17 @@ function MainApp() {
     }
   }, [user]);
 
-  // Cargar tareas asignadas globales desde localStorage
   React.useEffect(() => {
     const data = localStorage.getItem("tareasAsignadas");
     setTareasAsignadas(data ? JSON.parse(data) : {});
   }, []);
 
-  // Guardar tareas del usuario en localStorage
   React.useEffect(() => {
     if (user) {
       localStorage.setItem(`misTareas_${user.nombre}`, JSON.stringify(misTareas));
     }
   }, [misTareas, user]);
 
-  // Guardar tareas asignadas globales en localStorage
   React.useEffect(() => {
     localStorage.setItem("tareasAsignadas", JSON.stringify(tareasAsignadas));
   }, [tareasAsignadas]);
@@ -158,6 +154,8 @@ function MainApp() {
             </RutaProtegida>
           }
         />
+
+        <Route path="*" element={<PaginaNoEncontrada />} />
       </Routes>
       {!ocultarHeaderFooter && <Footer />}
     </>

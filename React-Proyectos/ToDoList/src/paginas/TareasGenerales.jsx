@@ -72,6 +72,22 @@ function TareasGenerales({ misTareas, agregarTarea, tareasAsignadas }) {
           setTareas(prev => [...prev, response.data]);
           cerrarModal();
         })
+        /*
+
+        setTareas(prev => [...prev, response.data])
+        
+        Esto actualiza el estado tareas:
+        
+        prev es el valor anterior del estado (las tareas actuales).
+        
+        ...prev copia todas las tareas anteriores.
+        
+        response.data es la nueva tarea devuelta por el servidor.
+        
+        El resultado es un nuevo array con todas las tareas anteriores más la nueva tarea al final.
+        
+        */
+        
         .catch(error => {
           console.error("Error al crear la tarea:", error);
           Swal.fire('Error', 'No se pudo crear la tarea.', 'error');
@@ -168,7 +184,7 @@ function TareasGenerales({ misTareas, agregarTarea, tareasAsignadas }) {
                 </button>
               )}
 
-              {user?.administrador === 1 && (
+              {user?.administrador === 1 && ( // {user && user.administrador === 1 && ()}
                 <>
                   <button onClick={() => editarTarea(tarea)} className="btn-editar">
                     <Edit2 size={18} className="iconoEditar" />
