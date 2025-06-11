@@ -11,6 +11,12 @@
       "nombre": "agustin",
       "pass": "$2b$10$euo.SCTwSCw8mTA4m5qQPuAeQ1ZWMbm3DVjibIMtWvgN9HcBHqAgC",
       "administrador": 0
+    },
+    {
+      "id": "c22d",
+      "nombre": "Carla",
+      "pass": "$2b$10$THCO4surrZQcurWhomzJsOtW9A4BaxekSKPd7Xw0Xr.OVuGJFryXq",
+      "administrador": 0
     }
   ],
   "tareas": [
